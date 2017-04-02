@@ -9,6 +9,9 @@
 <c:if test="${textAdded}">
 	<jsp:useBean id="textAdded" scope="request" type="java.lang.Boolean" />
 </c:if>
+<c:if test="${textUpdated}">
+	<jsp:useBean id="textUpdated" scope="request" type="java.lang.Boolean" />
+</c:if>
 <c:if test="${not empty welcomeMessage}">
 	<jsp:useBean id="welcomeMessage" scope="request" type="java.lang.String" />
 </c:if>
@@ -28,17 +31,49 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#tableTextList').DataTable({
-			"bSort" : false,
-			"bFilter": false
+		var dataTable = $('#tableTextList').DataTable({
+							"bSort" : false,
+							"bFilter": false,
+							"columnDefs": [{
+											"targets": [ 2 ],
+				                			"visible": false
+											}
+							              ]
+						});
+		$('#tableTextList tbody').on('click', 'a', function(){
+			var data = dataTable.row($(this).parents('tr')).data();
+			$('#idTextId').val(data[0]);
+			$('#idTextTitle').val(jQuery(data[1]).text());
+			$('#idTextContent').val(data[2]);
+			
+			$('#idTextTitle').attr('readonly',true);
+			
+			$('.header-addtext').text('Edit Text');
+			$('.btn-add-edit-text').html('Edit');
+			$('.form-add-new-text').attr('action','update-text');
+			//$('.btn-add-new-text').hide();
+			$('.btn-add-new-text').show();
+			$('.form-add-new-text').show(1000);
 		});
 		
 		$('.div-text-added').hide(2000);
 		$('.form-add-new-text').hide();
 		
 		$('.btn-add-new-text').on('click', function(){
+			$('.header-addtext').text('Add Text');
+			$('.btn-add-edit-text').html('Add');
+			
+			$('#idTextId').val('');
+			$('#idTextTitle').val('');
+			$('#idTextContent').val('');
+			
+			$('#idTextTitle').attr('readonly',false);
+			$('.form-add-new-text').attr('action','add-text');
+			
 			$('.form-add-new-text').show(1000);
-			$(this).hide();
+			if($('.btn-add-edit-text').html() == 'Add'){
+				$(this).hide();
+			}
 		})
 	});
 </script>
@@ -70,7 +105,8 @@
 <body>
 <div class="container main-div">
 	<div class="form-div">		
-		<form:form commandName="text" method="POST" action="save-text" class="form-add-new-text">
+		<form:form commandName="text" method="POST" action="add-text" class="form-add-new-text">
+			<input type="hidden" name="textId" id="idTextId" />
 			<h2 class="header-addtext">Add text</h2>
 			<div class="form-group">
 				<label for="idTextTitle">Title</label>
@@ -80,13 +116,18 @@
 				<label for="idTextContent">Text</label>
 				<textarea class="form-control" id="idTextContent" name="textContent" placeholder="Text" ></textarea>
 			</div>
-			<button type="submit" class="btn btn-primary">Add</button>
+			<button type="submit" class="btn btn-primary btn-add-edit-text">Add</button>
 		</form:form>
-		<button type="button" class="btn btn-primary btn-add-new-text">Add New Text</button>
+			<button type="button" class="btn btn-primary btn-add-new-text">Add New Text</button>
 	</div>
 	<c:if test="${textAdded}">
 		<div class="alert alert-success div-text-added">
 			<strong>Success!</strong> Text is added !
+		</div>
+	</c:if>
+	<c:if test="${textUpdated}">
+		<div class="alert alert-success div-text-added">
+			<strong>Success!</strong> Text is Updated !
 		</div>
 	</c:if>
 	<div class="table-div">
@@ -97,6 +138,7 @@
 					<tr>
 						<th>Id</th>
 						<th>Title</th>
+						<th>Content</th>
 						<th>Created Date</th>
 					</tr>
 				</thead>
@@ -104,7 +146,8 @@
 					<c:forEach items="${availableTextList}" var="currentText">
 						<tr>
 							<td>${currentText.textId}</td>
-							<td>${currentText.textTitle}</td>
+							<td><a target="#">${currentText.textTitle}</a></td>
+							<td>${currentText.textContent}</td>
 							<td>${currentText.createdDate}</td>
 						</tr>
 					</c:forEach>

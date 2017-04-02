@@ -32,13 +32,26 @@ public class TextCommonController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(path = "/save-text", method = RequestMethod.POST)
+	@RequestMapping(path = "/add-text", method = RequestMethod.POST)
 	public ModelAndView saveText(@ModelAttribute("text")Text text){
 		ModelAndView modelAndView = new ModelAndView("welCome");
 		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
 		text = textRepositoryService.addText(text);
 		if(text != null && text.getTextId() != null){
 			modelAndView.addObject("textAdded", true);
+		}
+		modelAndView.addObject("availableTextList", textRepositoryService.getAllTextOrderByCreatedDate());
+		return modelAndView;
+	}
+	
+	@RequestMapping(path = "/update-text", method = RequestMethod.POST)
+	public ModelAndView updateText(@ModelAttribute("text")Text text){
+		ModelAndView modelAndView = new ModelAndView("welCome");
+		Long currentTextId = text.getTextId();
+		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
+		text = textRepositoryService.addText(text);
+		if(text != null && text.getTextId().equals(currentTextId)){
+			modelAndView.addObject("textUpdated", true);
 		}
 		modelAndView.addObject("availableTextList", textRepositoryService.getAllTextOrderByCreatedDate());
 		return modelAndView;
