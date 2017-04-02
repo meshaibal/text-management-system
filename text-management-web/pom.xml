@@ -60,7 +60,7 @@
 
 
 	<build>
-		<finalName>student-management</finalName>
+		<finalName>text-management</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

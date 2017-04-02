@@ -1,6 +1,7 @@
 package com.edia.text.management.persistence.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class Text {
 	@Id
 	@Column(name = "text_id")
 	@GeneratedValue(generator = "seqGen", strategy = GenerationType.SEQUENCE)
-	private String textId;
+	private Long textId;
 	
 	@Column(name = "text_title")
 	private String textTitle;
@@ -27,16 +28,16 @@ public class Text {
 	private String textContent;
 
 	@Column(name = "created_date")
-	private Date createdDate;
+	private Timestamp createdDate;
 	
 	public Text() {
 	}
 
-	public String getTextId() {
+	public Long getTextId() {
 		return textId;
 	}
 
-	public void setTextId(String textId) {
+	public void setTextId(Long textId) {
 		this.textId = textId;
 	}
 
@@ -56,11 +57,11 @@ public class Text {
 		this.textContent = textContent;
 	}
 
-	public Date getCreatedDate() {
+	public Timestamp getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(Timestamp createdDate) {
 		this.createdDate = createdDate;
 	}
 	
