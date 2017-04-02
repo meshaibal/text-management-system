@@ -40,7 +40,9 @@ public class TextCommonController {
 		ModelAndView modelAndView = new ModelAndView("welCome");
 		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
 		text.setDifficultyLevel(determineTextDifficultyLevel.getTextDifficultyLevel(text.getTextContent()));
+		
 		text = textRepositoryService.addText(text, false);
+		
 		if(text != null && text.getTextId() != null){
 			modelAndView.addObject("textAdded", true);
 		}else{
@@ -56,7 +58,9 @@ public class TextCommonController {
 		Long currentTextId = text.getTextId();
 		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
 		text.setDifficultyLevel(determineTextDifficultyLevel.getTextDifficultyLevel(text.getTextContent()));
+		
 		text = textRepositoryService.addText(text, true);
+		
 		if(text != null && text.getTextId().equals(currentTextId)){
 			modelAndView.addObject("textUpdated", true);
 		}
