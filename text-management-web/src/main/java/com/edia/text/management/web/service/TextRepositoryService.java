@@ -19,7 +19,10 @@ public class TextRepositoryService {
 		this.textRepository = textRepository;
 	}
 	
-	public Text addText(Text text){
+	public Text addText(Text text, boolean isUpdate){
+		if(!isUpdate && textRepository.findByTextTitle(text.getTextTitle()) != null){
+			return null;
+		}
 		return textRepository.save(text);
 	}
 	

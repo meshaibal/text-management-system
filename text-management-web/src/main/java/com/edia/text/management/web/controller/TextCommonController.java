@@ -19,6 +19,7 @@ public class TextCommonController {
 
 	private TextRepositoryService textRepositoryService;
 	private DetermineTextDifficultyLevel determineTextDifficultyLevel;
+	
 	//Injecting dependency through constructor-injection
 	@Autowired
 	public TextCommonController(TextRepositoryService textRepositoryService, DetermineTextDifficultyLevel determineTextDifficultyLevel) {
@@ -39,9 +40,11 @@ public class TextCommonController {
 		ModelAndView modelAndView = new ModelAndView("welCome");
 		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
 		text.setDifficultyLevel(determineTextDifficultyLevel.getTextDifficultyLevel(text.getTextContent()));
-		text = textRepositoryService.addText(text);
+		text = textRepositoryService.addText(text, false);
 		if(text != null && text.getTextId() != null){
 			modelAndView.addObject("textAdded", true);
+		}else{
+			modelAndView.addObject("isExists", true);
 		}
 		modelAndView.addObject("availableTextList", textRepositoryService.getAllTextOrderByCreatedDate());
 		return modelAndView;
@@ -53,7 +56,7 @@ public class TextCommonController {
 		Long currentTextId = text.getTextId();
 		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
 		text.setDifficultyLevel(determineTextDifficultyLevel.getTextDifficultyLevel(text.getTextContent()));
-		text = textRepositoryService.addText(text);
+		text = textRepositoryService.addText(text, true);
 		if(text != null && text.getTextId().equals(currentTextId)){
 			modelAndView.addObject("textUpdated", true);
 		}

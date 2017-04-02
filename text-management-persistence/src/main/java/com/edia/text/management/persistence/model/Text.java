@@ -1,5 +1,6 @@
 package com.edia.text.management.persistence.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -14,14 +15,14 @@ import javax.persistence.Table;
 @Entity
 @Table
 @SequenceGenerator(name = "seqGen", sequenceName = "text_id", allocationSize = 1)
-public class Text {
+public class Text implements Serializable{
 
 	@Id
 	@Column(name = "text_id")
 	@GeneratedValue(generator = "seqGen", strategy = GenerationType.SEQUENCE)
 	private Long textId;
 	
-	@Column(name = "text_title")
+	@Column(name = "text_title", unique = true)
 	private String textTitle;
 	
 	@Column(name = "text_content")

@@ -11,4 +11,6 @@ import com.edia.text.management.persistence.model.Text;
 public interface TextRepository extends JpaRepository<Text, Long>{
 
 	List<Text> findAllByOrderByCreatedDateDesc();
+	
+	Text findByTextTitle(String textTitle);
 }

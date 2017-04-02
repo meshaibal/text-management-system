@@ -6,6 +6,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+<c:if test="${isExists}">
+	<jsp:useBean id="isExists" scope="request" type="java.lang.Boolean" />
+</c:if>
 <c:if test="${textAdded}">
 	<jsp:useBean id="textAdded" scope="request" type="java.lang.Boolean" />
 </c:if>
@@ -55,6 +58,7 @@
 			$('.form-add-new-text').show(1000);
 		});
 		
+		$('.div-title-already-exists').hide(5000);
 		$('.div-text-added').hide(2000);
 		$('.form-add-new-text').hide();
 		
@@ -146,6 +150,11 @@
 	<c:if test="${textUpdated}">
 		<div class="alert alert-success div-text-added">
 			<strong>Success!</strong> Text is Updated !
+		</div>
+	</c:if>
+	<c:if test="${isExists}">
+		<div class="alert alert-danger div-title-already-exists">
+			<strong>Error!</strong> Title already exists !
 		</div>
 	</c:if>
 	<div class="table-div">
