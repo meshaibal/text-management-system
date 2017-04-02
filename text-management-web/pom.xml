@@ -2,10 +2,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  <groupId>com.edia.text.management</groupId>
+  <parent>
+  	<groupId>com.edia.text.management</groupId>
+  	<artifactId>text-management-root</artifactId>
+  	<version>1.0.0-SNAPSHOT</version>
+  </parent>
+
   <artifactId>text-management-web</artifactId>
   <packaging>war</packaging>
-  <version>1.0.0-SNAPSHOT</version>
   
   <name>text-management-web Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -15,12 +19,15 @@
   		
   		<servlet.version>3.1.0</servlet.version>
   		<jstl.version>1.2</jstl.version>
-  		
-  		<spring.version>4.3.7.RELEASE</spring.version>
   </properties>
   
   <dependencies>
   
+  	<dependency>
+  		<groupId>com.edia.text.management</groupId>
+  		<artifactId>text-management-persistence</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
   	<dependency>
   		<groupId>javax.servlet</groupId>
     	<artifactId>javax.servlet-api</artifactId>
@@ -50,7 +57,20 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
-    <finalName>text-management-web</finalName>
-  </build>
+
+
+	<build>
+		<finalName>student-management</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<!-- <version>3.3</version> -->
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
