@@ -1,0 +1,20 @@
+.main-div{
+	width: 400px;
+	float: none;
+    margin: 0 auto; 
+    background-color: #D8D7CF;
+    margin-top: 20px;
+}
+
+.form-div{
+	margin-bottom: 50px;
+}
+
+.header-mytext, .header-addtext{
+	background-color: #ABCDEC;
+	padding: 5px 5px 5px 5px;
+}
+
+.btn-add-new-text{
+	margin-top: 5px;
+}
