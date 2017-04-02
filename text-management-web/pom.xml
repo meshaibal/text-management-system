@@ -39,6 +39,7 @@
 		<version>${jstl.version}</version>
 	</dependency>
 	
+	<!-- Spring dependency -->
   	<dependency>
   		<groupId>org.springframework</groupId>
 		<artifactId>spring-web</artifactId>
@@ -49,13 +50,6 @@
     	<artifactId>spring-webmvc</artifactId>
     	<version>${spring.version}</version>
 	</dependency>
-	
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
     
     <!-- commons -->
 		<dependency>
@@ -63,6 +57,32 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons.lang.version}</version>
 		</dependency>
+		
+	<!-- Testing dependency -->
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-module-junit4</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-api-mockito</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hamcrest</groupId>
+                        <artifactId>hamcrest-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
   </dependencies>
 
 

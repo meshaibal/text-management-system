@@ -7,13 +7,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DetermineTextDifficulty {
+public class DetermineTextDifficultyLevel {
 
 	private static final String REGEX_TO_VALIDATE_ONLY_LETTER = "[^a-zA-Z]+" ;
 	private static final String REGEX_TO_VALIDATE_ONLY_LETTER_AND_NUMBER = "[^a-zA-Z0-9]+" ;
 	
 	
-	public Integer getTextDifficulty(String textContent){
+	public Integer getTextDifficultyLevel(String textContent){
 		if(StringUtils.isEmpty(textContent)){
 			return -1;
 		}
@@ -31,15 +31,11 @@ public class DetermineTextDifficulty {
 		return 3;
 	}
 	
-	private boolean validateRegex(String pattern, String text){
-		Pattern p = Pattern.compile(pattern);
-	     Matcher m = p.matcher(text);
+	private boolean validateRegex(String patternToMatch, String text){
+		 Pattern pattern = Pattern.compile(patternToMatch);
+	     Matcher matcher = pattern.matcher(text);
 
-	     return m.find();
+	     return matcher.find();
 	}
-	
-	public static void main(String[] args) {//[^a-zA-Z]+     [^a-zA-Z0-9]+
-		DetermineTextDifficulty d = new DetermineTextDifficulty();
-		System.out.println(d.getTextDifficulty("wqwqeqwew!"));
-	}
+
 }

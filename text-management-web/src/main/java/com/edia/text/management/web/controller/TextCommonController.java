@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edia.text.management.persistence.model.Text;
-import com.edia.text.management.web.service.DetermineTextDifficulty;
+import com.edia.text.management.web.service.DetermineTextDifficultyLevel;
 import com.edia.text.management.web.service.TextRepositoryService;
 
 @Controller
 public class TextCommonController {
 
 	private TextRepositoryService textRepositoryService;
-	private DetermineTextDifficulty determineTextDifficulty;
+	private DetermineTextDifficultyLevel determineTextDifficultyLevel;
 	//Injecting dependency through constructor-injection
 	@Autowired
-	public TextCommonController(TextRepositoryService textRepositoryService, DetermineTextDifficulty determineTextDifficulty) {
+	public TextCommonController(TextRepositoryService textRepositoryService, DetermineTextDifficultyLevel determineTextDifficultyLevel) {
 		this.textRepositoryService = textRepositoryService;
-		this.determineTextDifficulty = determineTextDifficulty;
+		this.determineTextDifficultyLevel = determineTextDifficultyLevel;
 	}
 
 
@@ -38,7 +38,7 @@ public class TextCommonController {
 	public ModelAndView saveText(@ModelAttribute("text")Text text){
 		ModelAndView modelAndView = new ModelAndView("welCome");
 		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
-		text.setDifficultyLevel(determineTextDifficulty.getTextDifficulty(text.getTextContent()));
+		text.setDifficultyLevel(determineTextDifficultyLevel.getTextDifficultyLevel(text.getTextContent()));
 		text = textRepositoryService.addText(text);
 		if(text != null && text.getTextId() != null){
 			modelAndView.addObject("textAdded", true);
@@ -52,7 +52,7 @@ public class TextCommonController {
 		ModelAndView modelAndView = new ModelAndView("welCome");
 		Long currentTextId = text.getTextId();
 		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
-		text.setDifficultyLevel(determineTextDifficulty.getTextDifficulty(text.getTextContent()));
+		text.setDifficultyLevel(determineTextDifficultyLevel.getTextDifficultyLevel(text.getTextContent()));
 		text = textRepositoryService.addText(text);
 		if(text != null && text.getTextId().equals(currentTextId)){
 			modelAndView.addObject("textUpdated", true);
