@@ -30,6 +30,9 @@ public class Text {
 	@Column(name = "created_date")
 	private Timestamp createdDate;
 	
+	@Column(name = "difficulty_level")
+	private Integer difficultyLevel;
+	
 	public Text() {
 	}
 
@@ -63,6 +66,14 @@ public class Text {
 
 	public void setCreatedDate(Timestamp createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public Integer getDifficultyLevel() {
+		return difficultyLevel;
+	}
+
+	public void setDifficultyLevel(Integer difficultyLevel) {
+		this.difficultyLevel = difficultyLevel;
 	}
 	
 	

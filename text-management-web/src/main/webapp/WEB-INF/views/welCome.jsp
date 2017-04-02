@@ -140,6 +140,7 @@
 						<th>Title</th>
 						<th>Content</th>
 						<th>Created Date</th>
+						<th>Difficulty Level</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -149,6 +150,7 @@
 							<td><a target="#">${currentText.textTitle}</a></td>
 							<td>${currentText.textContent}</td>
 							<td>${currentText.createdDate}</td>
+							<td>${currentText.difficultyLevel}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

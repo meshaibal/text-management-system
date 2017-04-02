@@ -27,6 +27,8 @@
   		<hibernate.version>5.2.3.Final</hibernate.version>
   		
   		<hsqldb.version>2.3.3</hsqldb.version>
+  		
+  		<commons.lang.version>3.4</commons.lang.version>
   </properties>
   
 </project>

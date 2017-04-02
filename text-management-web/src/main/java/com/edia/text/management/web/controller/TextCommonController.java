@@ -11,17 +11,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edia.text.management.persistence.model.Text;
+import com.edia.text.management.web.service.DetermineTextDifficulty;
 import com.edia.text.management.web.service.TextRepositoryService;
 
 @Controller
 public class TextCommonController {
 
 	private TextRepositoryService textRepositoryService;
-	
+	private DetermineTextDifficulty determineTextDifficulty;
 	//Injecting dependency through constructor-injection
 	@Autowired
-	public TextCommonController(TextRepositoryService textRepositoryService) {
+	public TextCommonController(TextRepositoryService textRepositoryService, DetermineTextDifficulty determineTextDifficulty) {
 		this.textRepositoryService = textRepositoryService;
+		this.determineTextDifficulty = determineTextDifficulty;
 	}
 
 
@@ -36,6 +38,7 @@ public class TextCommonController {
 	public ModelAndView saveText(@ModelAttribute("text")Text text){
 		ModelAndView modelAndView = new ModelAndView("welCome");
 		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
+		text.setDifficultyLevel(determineTextDifficulty.getTextDifficulty(text.getTextContent()));
 		text = textRepositoryService.addText(text);
 		if(text != null && text.getTextId() != null){
 			modelAndView.addObject("textAdded", true);
@@ -49,6 +52,7 @@ public class TextCommonController {
 		ModelAndView modelAndView = new ModelAndView("welCome");
 		Long currentTextId = text.getTextId();
 		text.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
+		text.setDifficultyLevel(determineTextDifficulty.getTextDifficulty(text.getTextContent()));
 		text = textRepositoryService.addText(text);
 		if(text != null && text.getTextId().equals(currentTextId)){
 			modelAndView.addObject("textUpdated", true);
