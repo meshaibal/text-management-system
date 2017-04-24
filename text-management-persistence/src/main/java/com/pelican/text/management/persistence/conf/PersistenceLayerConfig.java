@@ -1,15 +1,22 @@
-package com.edia.text.management.persistence.conf;
+package com.pelican.text.management.persistence.conf;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DataSourceUtils;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.edia.text.management.persistence.commons.PersistenceConstants;
+import com.pelican.text.management.persistence.commons.PersistenceConstants;
 
 @Configuration
 @ComponentScan(basePackages = {PersistenceLayerConfig.PACKAGE_PERSISTENCE_LAYER})
@@ -19,7 +26,7 @@ import com.edia.text.management.persistence.commons.PersistenceConstants;
 		)
 public class PersistenceLayerConfig {
 
-	public static final String PACKAGE_PERSISTENCE_LAYER = "com.edia.text.management.persistence" ;
+	public static final String PACKAGE_PERSISTENCE_LAYER = "com.pelican.text.management.persistence" ;
 	
 	private HsqlDataSourceConfig hsqlDataSourceConfig;
 
@@ -42,5 +49,25 @@ public class PersistenceLayerConfig {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
 		return transactionManager;
+	}
+	
+	@Bean
+	@Lazy(false)
+	public ResourceDatabasePopulator populateDatabase() throws SQLException {
+		
+		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.addScript(new ClassPathResource("textData.sql"));
+		
+		Connection connection = null;
+		
+		try {
+			connection = DataSourceUtils.getConnection(hsqlDataSourceConfig.createDataSource());
+			populator.populate(connection);
+		} finally {
+			if (connection != null) {
+				DataSourceUtils.releaseConnection(connection, hsqlDataSourceConfig.createDataSource());
+			}
+		}
+		return populator;
 	}
 }

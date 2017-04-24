@@ -1,4 +1,4 @@
-package com.edia.text.management.web.service;
+package com.pelican.text.management.web.service;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

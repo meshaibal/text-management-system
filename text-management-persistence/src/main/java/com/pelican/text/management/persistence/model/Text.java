@@ -1,4 +1,4 @@
-package com.edia.text.management.persistence.model;
+package com.pelican.text.management.persistence.model;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -28,8 +28,8 @@ public class Text implements Serializable{
 	@Column(name = "text_content")
 	private String textContent;
 
-	@Column(name = "created_date")
-	private Timestamp createdDate;
+	/*@Column(name = "created_date", columnDefinition = "timestamp default 'now'" )
+	private Timestamp createdDate;*/
 	
 	@Column(name = "difficulty_level")
 	private Integer difficultyLevel;
@@ -61,13 +61,13 @@ public class Text implements Serializable{
 		this.textContent = textContent;
 	}
 
-	public Timestamp getCreatedDate() {
+	/*public Timestamp getCreatedDate() {
 		return createdDate;
 	}
 
 	public void setCreatedDate(Timestamp createdDate) {
 		this.createdDate = createdDate;
-	}
+	}*/
 
 	public Integer getDifficultyLevel() {
 		return difficultyLevel;

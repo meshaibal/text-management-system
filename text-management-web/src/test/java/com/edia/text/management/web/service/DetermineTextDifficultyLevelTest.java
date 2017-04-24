@@ -2,6 +2,8 @@ package com.edia.text.management.web.service;
 
 import org.mockito.InjectMocks;
 
+import com.pelican.text.management.web.service.DetermineTextDifficultyLevel;
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;

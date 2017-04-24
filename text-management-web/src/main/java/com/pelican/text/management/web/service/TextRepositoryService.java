@@ -1,12 +1,12 @@
-package com.edia.text.management.web.service;
+package com.pelican.text.management.web.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edia.text.management.persistence.model.Text;
-import com.edia.text.management.persistence.repository.TextRepository;
+import com.pelican.text.management.persistence.model.Text;
+import com.pelican.text.management.persistence.repository.TextRepository;
 
 @Service
 public class TextRepositoryService {
@@ -27,6 +27,6 @@ public class TextRepositoryService {
 	}
 	
 	public List<Text> getAllTextOrderByCreatedDate(){
-		return textRepository.findAllByOrderByCreatedDateDesc();
+		return textRepository.findAll();
 	}
 }

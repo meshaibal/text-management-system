@@ -1,4 +1,4 @@
-package com.edia.text.management.persistence.conf;
+package com.pelican.text.management.persistence.conf;
 
 import javax.sql.DataSource;
 

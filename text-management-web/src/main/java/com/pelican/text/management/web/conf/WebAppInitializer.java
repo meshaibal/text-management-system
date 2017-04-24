@@ -1,4 +1,4 @@
-package com.edia.text.management.web.conf;
+package com.pelican.text.management.web.conf;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,11 +11,12 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+
 public class WebAppInitializer implements WebApplicationInitializer{
 
 	private static final Logger LOG = Logger.getLogger(WebAppInitializer.class);
 	
-	private static final String PACKAGE_WEB_CONFIGIRATION = "com.edia.text.management.web" ;
+	private static final String PACKAGE_WEB_CONFIGIRATION = "com.pelican.text.management.web" ;
 	
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		LOG.info("Initializing Web Layer");

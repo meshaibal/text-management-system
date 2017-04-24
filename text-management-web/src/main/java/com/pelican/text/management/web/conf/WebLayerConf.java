@@ -1,4 +1,4 @@
-package com.edia.text.management.web.conf;
+package com.pelican.text.management.web.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import com.edia.text.management.persistence.conf.PersistenceLayerConfig;
+import com.pelican.text.management.persistence.conf.PersistenceLayerConfig;
 
 @Configuration
 @EnableWebMvc
