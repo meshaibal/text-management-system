@@ -1,3 +1,5 @@
+ALTER SEQUENCE text_id RESTART WITH 13;
+
 insert into Text(text_id, text_title, text_content, difficulty_level) values(1, '1', 'This Is First Text', 0);
 insert into Text(text_id, text_title, text_content, difficulty_level) values(2, '2', 'This Is Second Text', 0);
 insert into Text(text_id, text_title, text_content, difficulty_level) values(3, '3', 'This Is Third Text', 0);

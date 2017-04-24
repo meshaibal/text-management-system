@@ -27,6 +27,6 @@ public class TextRepositoryService {
 	}
 	
 	public List<Text> getAllTextOrderByCreatedDate(){
-		return textRepository.findAll();
+		return textRepository.findAllByOrderByTextIdDesc();
 	}
 }

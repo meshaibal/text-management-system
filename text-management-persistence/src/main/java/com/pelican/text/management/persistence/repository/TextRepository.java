@@ -10,7 +10,7 @@ import com.pelican.text.management.persistence.model.Text;
 @Repository
 public interface TextRepository extends JpaRepository<Text, Long>{
 
-	//List<Text> findAllByOrderByCreatedDateDesc();
+	List<Text> findAllByOrderByTextIdDesc();
 	
 	Text findByTextTitle(String textTitle);
 }
