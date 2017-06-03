@@ -19,7 +19,7 @@
 	<jsp:useBean id="welcomeMessage" scope="request" type="java.lang.String" />
 </c:if>
 <c:if test="${not empty availableTextList}">
-	<jsp:useBean id="availableTextList" scope="request" type="java.util.List<com.edia.text.management.persistence.model.Text>" />
+	<jsp:useBean id="availableTextList" scope="request" type="java.util.List<com.pelican.text.management.persistence.model.Text>" />
 </c:if>
 
 <html>

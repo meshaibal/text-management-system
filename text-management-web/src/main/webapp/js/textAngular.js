@@ -1,14 +1,37 @@
 
 var angularApp = angular.module('textAngularApp',['angularUtils.directives.dirPagination','ngRoute']);
 
-angularApp.controller('textAngularListController', ['$scope', '$http', function($scope, $http){
-	$http.get('angular/texts')
+angularApp.service('LoadInitialTextListService',  function($http){
+	this.getTextList =  function(cb){
+		var textList;
+		$http.get('angular/texts')
 	     .then(
 	       function success(successResponse){
-	    	   $scope.texts = successResponse.data;
+	    	   console.log(successResponse.data);
+	    	   cb(successResponse.data);
 	       }
 	     );
-	
+		console.log("textList :"+textList);
+	}
+});
+
+angularApp.service('AddTextService', function($http){
+	this.addText = function(textToAdd, cb){
+		$http.post('angular/save-text', textToAdd)
+	     .then(
+	    	function success(successResponse){
+	    		console.log("Inside AddTextService textToAdd: "+textToAdd);
+	    		cb(successResponse.data);
+	    	}
+	     	);
+	}
+});
+
+angularApp.controller('textAngularListController', ['$scope', '$http', 'LoadInitialTextListService', function($scope, $http, LoadInitialTextListService){
+
+	LoadInitialTextListService.getTextList(function(r){
+		$scope.texts = r;
+	});
 	
 	$scope.getData = function(data){
 		//alert(JSON.stringify(data));
@@ -44,21 +67,13 @@ angularApp.config(['$routeProvider','$locationProvider', function($routeProvider
 		
 }]);
 
-angularApp.controller('AddTextController',['$scope','$http','$rootScope', function($scope, $http, $rootScope){
+angularApp.controller('AddTextController',['$scope','$http','$rootScope','AddTextService', function($scope, $http, $rootScope, AddTextService){
 	$rootScope.showAddTextForm = true;
 	$scope.addText = function(){
-		//alert(JSON.stringify($scope.text));
-		$scope.showAddTextForm = true;
-		$http.post('angular/save-text', $scope.text)
-	     .then(
-	    	function success(successResponse){
-	    		//alert(successResponse);
-	    		//$scope.texts = successResponse.data;
-	    		$rootScope.$broadcast('eventName', successResponse.data);
-	    		$scope.showAddTextForm = false;
-	    		//$scope.showAddTextButton = true;
-	    	}
-	     	);
+		AddTextService.addText($scope.text, function(r){
+			$rootScope.$broadcast('eventName', r);
+    		$scope.showAddTextForm = false;
+		});
 	
 	};
 }]);
