@@ -13,4 +13,6 @@ public interface TextRepository extends JpaRepository<Text, Long>{
 	List<Text> findAllByOrderByTextIdDesc();
 	
 	Text findByTextTitle(String textTitle);
+	
+	Text findByTextId(Long textId);
 }

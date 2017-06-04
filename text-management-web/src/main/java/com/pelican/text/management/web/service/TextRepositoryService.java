@@ -29,4 +29,8 @@ public class TextRepositoryService {
 	public List<Text> getAllTextOrderByCreatedDate(){
 		return textRepository.findAllByOrderByTextIdDesc();
 	}
+	
+	public Text getTextByTextId(Long textId){
+		return textRepository.findByTextId(textId);
+	}
 }

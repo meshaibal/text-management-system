@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
 <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">  
 
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
